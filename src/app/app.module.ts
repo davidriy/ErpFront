@@ -14,29 +14,34 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import { LoginComponent } from './components/login/component/login.component';
+import { EmployeeComponent } from './components/table/employee/employee.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     DataViewerComponent,
     MainPageComponent,
-    LoginComponent
+    LoginComponent,
+    EmployeeComponent,
+    EmployeeComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ButtonModule,
-    PaginatorModule,
-    BrowserAnimationsModule,
-    TableModule,
-    InputTextModule,
-    MessageModule,
-    MessagesModule,
-    ToastModule
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ButtonModule,
+        PaginatorModule,
+        BrowserAnimationsModule,
+        TableModule,
+        InputTextModule,
+        MessageModule,
+        MessagesModule,
+        ToastModule,
+        ReactiveFormsModule
 
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

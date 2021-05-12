@@ -9,25 +9,12 @@ import {EmployeeService} from "../../shared/services/data-viewer/employee.servic
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-  constructor(
-    private employeeService: EmployeeService,
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.getEmployees();
-  }
-  employees: Employee[] = [];
+  ngOnInit(): void {}
 
-  getEmployees(){
-    this.employeeService.getEmployees()
-      .subscribe(
-        (data) => {
-          // @ts-ignore
-          this.employees = data.body as Employee[];
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      );
-  }
+  user: string = '';
+  password: string = '';
+
+
 }

@@ -1,0 +1,152 @@
+<p-toast></p-toast>
+<div class="border">
+  <div class="container-fluid">
+    <div class="row">
+      <div
+        [ngClass]="
+      {
+      'col-xl-12': !mostrarEdicion,
+      'col-xl-8': mostrarEdicion
+      }"
+        class="border"
+      >
+        <p-table
+          #tt
+          [columns]="cols"
+          [value]="tableData"
+          [(selection)]="tableSelection"
+          (onRowSelect)="onRowSelect($event)"
+          (onRowUnselect)="onRowUnselect($event)"
+          selectionMode="single"
+          dataKey="id"
+          [autoLayout]="true"
+        >
+          <ng-template pTemplate="caption">
+            <div class="row">
+              <div class="col-xl-6 col-md-6">
+                <h4>List of employees</h4>
+              </div>
+              <div class="col-xl-6 col-md-6" style="text-align: right">
+                <p-button
+                  label="Add"
+                  icon="pi pi-plus"
+                  (onClick)="addClicked()"
+                ></p-button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td
+                *ngFor="let col of columns"
+              >
+                {{rowData[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <label>There are {{tableData.length}} employees.</label>
+          </ng-template>
+        </p-table>
+      </div>
+      <div
+        class="col-xl-4 border"
+        *ngIf="mostrarEdicion"
+
+      >
+        <div style="margin: 0.75em" [formGroup]="employeeForm">
+          <div class="row" style="margin: 1em">
+            <div >
+              <h4>Edit data</h4>
+            </div>
+          </div>
+          <div class="row" style="margin: 0.5em">
+            <div class="col-xl-3">
+              <span>Name</span>
+            </div>
+            <div class="col-xl-9">
+              <input
+                pInputText
+                type="text"
+                formControlName="name"
+              />
+            </div>
+          </div>
+          <div class="row" style="margin: 0.5em">
+            <div class="col-xl-3">
+              <span>Last name</span>
+            </div>
+            <div class="col-xl-9">
+              <input
+                pInputText
+                type="text"
+                formControlName="last_name"
+              />
+            </div>
+          </div>
+          <div class="row" style="margin: 0.5em">
+            <div class="col-xl-3">
+              <span>Salary</span>
+            </div>
+            <div class="col-xl-9">
+              <input
+                pInputText
+                type="number"
+                formControlName="salary"
+              />
+            </div>
+          </div>
+          <div class="row" style="margin: 0.5em">
+            <div class="col-xl-3">
+              <span>Document</span>
+            </div>
+            <div class="col-xl-9">
+              <input
+                pInputText
+                type="text"
+                formControlName="document"
+              />
+            </div>
+          </div>
+<!--          BOTONES-->
+          <div>
+            <div style="margin: 1em">
+              <div class="col-xl-12">
+                <button
+                  pButton
+                  label="Save"
+                  icon="pi pi-save"
+                  class="col-xl-3"
+                  style="margin: 0.5em"
+                ></button>
+                <button
+                  pButton
+                  label="Delete"
+                  icon="pi pi-trash"
+                  class="p-button-danger col-xl-4"
+                  style="margin: 0.5em"
+                  (click)="addEmployee()"
+                ></button>
+                <button
+                  pButton
+                  label="Close"
+                  icon="pi pi-times"
+                  (click)="mostrarEdicion = false"
+                  class="col-xl-3"
+                  style="margin: 0.5em"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

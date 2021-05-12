@@ -18,4 +18,14 @@ export class EmployeeService {
   public addEmployee(employee: Employee): Observable<Employee>{
     return this.http.post<Employee>(`${environment.apiBaseUrl}/employee/add`, employee);
   }
+
+  public updateEmployee(employee: Employee): Observable<Employee>{
+    return this.http.put<Employee>(`${environment.apiBaseUrl}/employee/add`, employee);
+  }
+
+  public deleteEmployee(employee: Employee): Observable<Employee>{
+    return this.http.delete<Employee>(`${environment.apiBaseUrl}/employee/add/` + employee.id);
+  }
+
+
 }
