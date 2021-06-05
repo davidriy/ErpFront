@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {EmployeeService} from "../../../shared/services/data-viewer/employee.service";
+import {EmployeeService} from "../../../shared/services/employee.service";
 import {Employee} from "../resource/employee.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import { MessageService } from 'primeng/api';
@@ -30,7 +30,7 @@ export class DataViewerComponent implements OnInit {
       .subscribe(
         (data) => {
           // @ts-ignore
-          this.tableData = data.body as Employee[];
+          this.tableData = data;
           this.totalRecords = this.tableData.length;
         },
         (error: HttpErrorResponse) => {

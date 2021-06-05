@@ -15,7 +15,14 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import { LoginComponent } from './components/login/component/login.component';
 import { EmployeeComponent } from './components/table/employee/employee.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {ChartModule} from 'primeng/chart';
+import { LocationComponent } from './components/location/location.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { SuggestionComponent } from './components/suggestion/suggestion.component';
+import {GMapModule} from 'primeng/gmap';
+import { AdriacardonaComponent } from './components/adriacardona/adriacardona.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     MainPageComponent,
     LoginComponent,
     EmployeeComponent,
-    EmployeeComponent
+    DashboardComponent,
+    LocationComponent,
+    ContactComponent,
+    SuggestionComponent,
+    AdriacardonaComponent
   ],
     imports: [
         BrowserModule,
@@ -38,7 +49,10 @@ import {ReactiveFormsModule} from "@angular/forms";
         MessageModule,
         MessagesModule,
         ToastModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule,
+        ChartModule,
+      GMapModule
 
 
     ],

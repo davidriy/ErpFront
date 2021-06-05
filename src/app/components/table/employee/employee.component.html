@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<p-toast [key]="alertKey"></p-toast>
 <div class="border">
   <div class="container-fluid">
     <div class="row">
@@ -28,7 +28,6 @@
               </div>
               <div class="col-xl-6 col-md-6" style="text-align: right">
                 <p-button
-                  label="Add"
                   icon="pi pi-plus"
                   (onClick)="addClicked()"
                 ></p-button>
@@ -121,25 +120,23 @@
               <div class="col-xl-12">
                 <button
                   pButton
-                  label="Save"
                   icon="pi pi-save"
-                  class="col-xl-3"
+                  class="col-xl-2"
                   style="margin: 0.5em"
+                  (click)="saveClicked()"
                 ></button>
                 <button
                   pButton
-                  label="Delete"
                   icon="pi pi-trash"
-                  class="p-button-danger col-xl-4"
+                  class="p-button-danger col-xl-2"
                   style="margin: 0.5em"
-                  (click)="addEmployee()"
+                  (click)="deleteEmploye()"
                 ></button>
                 <button
                   pButton
-                  label="Close"
                   icon="pi pi-times"
                   (click)="mostrarEdicion = false"
-                  class="col-xl-3"
+                  class="col-xl-2"
                   style="margin: 0.5em"
                 ></button>
               </div>

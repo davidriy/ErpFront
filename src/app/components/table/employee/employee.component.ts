@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
 import {Employee} from "../../data-viewer/resource/employee.model";
-import {EmployeeService} from "../../../shared/services/data-viewer/employee.service";
+import {EmployeeService} from "../../../shared/services/employee.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FormControl, FormGroup} from "@angular/forms";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-employee',
@@ -35,6 +36,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployees() {
+    this.tableData = [];
     this.employeeService.getEmployees()
       .subscribe(
         (data) => {
@@ -94,6 +96,8 @@ export class EmployeeComponent implements OnInit {
     this.mostrarEdicion = false;
   }
   addClicked(){
+    this.resetForm();
+    this.tableSelection = new Employee('','','',0,'');
     this.mostrarEdicion = true;
     this.isInsert = true;
   }
@@ -116,38 +120,86 @@ export class EmployeeComponent implements OnInit {
       this.employeeForm.controls.id.value,
       this.employeeForm.controls.name.value,
       this.employeeForm.controls.last_name.value,
-      this.employeeForm.controls.document.value,
-      this.employeeForm.controls.salary.value
+      this.employeeForm.controls.salary.value,
+      this.employeeForm.controls.document.value
     );
+  }
+  saveClicked(){
+    if(this.isInsert){
+      this.addEmployee();
+    } else{
+      this.updateEmployee();
+    }
   }
   addEmployee(){
     this.employeeService
       .addEmployee(this.getFormData())
+      .pipe(
+        finalize(
+          () => {
+            this.getEmployees();
+            this.mostrarEdicion = false;
+            this.resetForm();
+          }
+        )
+      )
       .subscribe(
         (data) => {
-          if(data){
-            this.messageService.add({
-              key: this.alertKey,
-              severity: 'success',
-              summary: 'There was an error while inserting a new employee.',
-              detail: 'Insert error'
-            });
-          } else {
-            this.messageService.add({
-              key: this.alertKey,
-              severity: 'error',
-              summary: 'There was an error while inserting a new employee.',
-              detail: 'Insert error'
-            });
-          }
+          this.messageService.add({
+            key: this.alertKey,
+            severity: 'success',
+            summary: 'There was an error while inserting a new employee.',
+            detail: 'Insert error'
+          });
         }
       );
   }
   updateEmployee(){
-
+    this.employeeService
+      .updateEmployee(this.getFormData())
+      .pipe(
+        finalize(
+          () => {
+            this.getEmployees();
+            this.mostrarEdicion = false;
+            this.resetForm();
+          }
+        )
+      )
+      .subscribe(
+        (data) => {
+          this.messageService.add({
+            key: this.alertKey,
+            severity: 'success',
+            summary: 'There was an error while inserting a new employee.',
+            detail: 'Insert error'
+          });
+        }
+      );
   }
   deleteEmploye(){
-
+    console.log(this.getFormData());
+    this.employeeService
+      .deleteEmployee(this.getFormData())
+      .pipe(
+        finalize(
+          () => {
+            this.getEmployees();
+            this.mostrarEdicion = false;
+            this.resetForm();
+          }
+        )
+      )
+      .subscribe(
+        (data) => {
+          this.messageService.add({
+            key: this.alertKey,
+            severity: 'success',
+            summary: 'Employee was deleted.',
+            detail: 'Delete successful'
+          });
+        }
+      );
   }
 }
 

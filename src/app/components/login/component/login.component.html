@@ -1,5 +1,116 @@
-<div >
-  <div>
-    TEST
-  </div>
+<p-toast [key]="alertKey"></p-toast>
+<div *ngIf="showLoginWindow">
+  <section id="login" class="mb-5 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+          <div class="card_login">
+            <div class="card">
+              <div class="card-body text-center">
+                <form #formLogin="ngForm">
+                  <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="email"
+                      name="email"
+                      class="form-control"
+                      placeholder="Username"
+                      required
+                      [(ngModel)]="user"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      class="form-control"
+                      placeholder="Password"
+                      required
+                      [(ngModel)]="password"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-lg btn-primary btn-block"
+                    [disabled]="!user || !password"
+                    (click)="login()"
+                  >
+                    Login
+                  </button>
+                  <button
+                    pButton
+                    type="button"
+                    icon="pi pi-question-circle"
+                    class="p-button-text"
+                    style="text-align: left"
+                    label="Are you new?"
+                    (click)="show('register')"
+                  ></button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+<div *ngIf="showRegisterWindow">
+  <section id="register" class="mb-5 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+          <div class="card_login">
+            <div class="card">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-angle-left"
+                class="p-button-text"
+                style="text-align: left"
+                (click)="show('login')"
+              ></button>
+              <div class="card-body text-center">
+                <form #formLogin="ngForm">
+                  <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      name="email"
+                      class="form-control"
+                      placeholder="Username"
+                      [(ngModel)]="user"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      placeholder="Password"
+                      [(ngModel)]="password"
+                      required
+                    />
+                  </div>
+                  <button
+                    [disabled]="!user || !password"
+                    type="submit"
+                    class="btn btn-lg btn-primary btn-block"
+                    (click)="registerUser()"
+                  >
+                    Register
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--<app-employee *ngIf="showMainWindow"></app-employee>-->
+<app-main-page *ngIf="showMainWindow" [username]="user" (logout)="onLogout()"></app-main-page>
